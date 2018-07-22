@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Dataset directories
+dataset/validation/*
+dataset/training/*
+
 # C extensions
 *.so
 
