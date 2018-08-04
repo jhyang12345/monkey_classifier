@@ -1,6 +1,8 @@
 import os
 from PIL import Image
 
+im_size = 224
+
 def join_directories(dirs):
     ret = ""
     for dir in dirs:
@@ -15,6 +17,11 @@ def join_datasets(training, validation):
         ret[key].extend(validation[key])
     return ret
 
+def open_image_and_resize(image_directory, im_size=im_size):
+    im = Image.open(image_directory)
+    im = im.resize((im_size, im_size))
+    return im
+
 def get_dataset(cur_dir):
     classes = os.listdir(cur_dir)
     image_dict = {class_:[] for class_ in classes}
@@ -22,7 +29,7 @@ def get_dataset(cur_dir):
         image_dir = os.path.join(cur_dir, class_)
         images = os.listdir(image_dir)
         for im in images:
-            image_dict[class_].append(join_directories([cur_dir, image_dir, im]))
+            image_dict[class_].append(open_image_and_resize(join_directories([image_dir, im])))
     return image_dict
 
 def get_class_to_int(classes):
@@ -33,8 +40,18 @@ def get_class_to_int(classes):
         ret2[i] = class_
     return ret, ret2
 
+def class_to_one_hot(class_, class_to_int):
+    arr = [0. for _ in range(len(class_to_int.keys()))]
+    arr[class_to_int[class_]] = 1.
+    return arr
+
+# def get_input_datasets():
+
+
 if __name__ == '__main__':
     training = get_dataset(os.path.join("dataset", "training"))
     validation = get_dataset(os.path.join("dataset", "validation"))
     joined_dataset = join_datasets(training, validation)
     class_to_int, int_to_class = get_class_to_int(joined_dataset.keys())
+    print(class_to_int, int_to_class)
+    print(class_to_one_hot(list(class_to_int.keys())[0], class_to_int))
