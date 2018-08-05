@@ -12,6 +12,7 @@ class Classifier:
         self.image_size = 224
         self.channels = 3
         self.classes = 10
+        self.model = self.build_model()
 
     def build_model(self):
         c_input = Input(shape=(self.image_size, self.image_size, self.channels))

@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+*.hdf5
+
 # Dataset directories
 dataset/validation/*
 dataset/training/*

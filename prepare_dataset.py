@@ -50,7 +50,7 @@ def class_to_one_hot(class_, class_to_int):
 def get_input_datasets(im_size=im_size):
     training = get_dataset(os.path.join("dataset", "training"), im_size)
     validation = get_dataset(os.path.join("dataset", "validation"), im_size)
-    class_to_int, int_to_class = get_class_to_int(joined_dataset.keys())
+    class_to_int, int_to_class = get_class_to_int(training.keys())
     training_input = []
     training_output = []
     for class_ in training.keys():
