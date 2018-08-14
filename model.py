@@ -29,14 +29,14 @@ class Classifier:
         # x = Dropout(0.3)(x)
         # x = Dense(256, activation='relu')(x)
 
-        x = Conv2D(filters=1024, kernel_size=4, padding='same', activation='relu')(x)
+        x = Conv2D(filters=1024, kernel_size=4, padding='same', activation='elu')(x)
         # x = Conv2D(filters=512, kernel_size=4, padding='same', activation='relu')(x)
         x = MaxPooling2D(pool_size=(2, 2))(x)
         x = BatchNormalization()(x)
         #
         x = Dropout(0.5)(x)
 
-        x = Conv2D(filters=1024, kernel_size=4, padding='same', activation='relu')(x)
+        x = Conv2D(filters=1024, kernel_size=4, padding='same', activation='elu')(x)
         # x = Conv2D(filters=512, kernel_size=4, padding='same', activation='relu')(x)
         x = MaxPooling2D(pool_size=(2, 2))(x)
         x = BatchNormalization()(x)
